@@ -7,10 +7,11 @@
   <groupId>com.promineotech</groupId>
   <artifactId>workoutLog</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
 
-  <name>socialMediaApi</name>
+  <name>workoutLog</name>
   <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <url>http://maven.apache.org</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -1,6 +1,7 @@
 package com.promineotech.workoutLog.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,9 @@ public class WorkoutService {
 	@Autowired
 	private WorkoutRepository repo;
 	
+	@Autowired
+	private PersonRepository personRepo;
+	
 	public void deleteWorkout(Long workoutId) {
 		repo.delete(workoutId);
 	}
@@ -26,21 +30,21 @@ public class WorkoutService {
 		return repo.findAll();
 	}
 	
-	public Workout getWorkout(Long id) {
-		return repo.findOne(id);
+	public Workout getWorkout(Long workoutId) {
+		return repo.findOne(workoutId);
 	}
 	
-	public Workout updateWorkout(Workout workout, Long id) throws Exception {
-		Workout foundWorkout = repo.findOne(id);
+	public Workout updateWorkout(Workout workout, Long workoutId) throws Exception {
+		Workout foundWorkout = repo.findOne(workoutId);
 		if (foundWorkout == null) {
 			throw new Exception("No Workout found.");
 		}
-		foundWorkout.setContent(workout.getContent());
+		foundWorkout.setExercises(workout.getExercises());
 		return repo.save(foundWorkout);
 	}
 	
-	public Workout createWorkout(Workout workout, Long personId) throws Exception {
-		Person person = personRepo.findOne(personId);
+	public Workout createWorkout(Workout workout, Long username) throws Exception {
+		Person person = personRepo.findOne(username);
 		if (person == null) {
 			throw new Exception("Person not found.");
 		}

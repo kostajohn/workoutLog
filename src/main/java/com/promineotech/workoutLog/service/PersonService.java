@@ -17,8 +17,15 @@ public class PersonService {
 		return repo.save(person);
 	}
 	
-//*login & Password method goes here;
+	public Person login(Person person) throws Exception {
+		Person foundPerson = repo.findByUsername(person.getusername());
+		if (foundPerson != null && foundPerson.getPassword().contentEquals(person.getPassword())) {
+			return foundPerson;
+		} else {
+			throw new Exception("Invalid username or password.");
+		}
+	}
 	
-//*following method goes here;
+//*following method goes here, if follower function added;
 	
 }

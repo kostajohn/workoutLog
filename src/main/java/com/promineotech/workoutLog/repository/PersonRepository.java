@@ -4,8 +4,8 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.promineotech.workoutLog.entity.Person;
 
-public interface PersonRepository extends CrudRepository<Long, Person> {
+public interface PersonRepository extends CrudRepository<Person, Long> {
 	
-	public Person name findbyName(String, Name);
+	public Person findByUsername(String username);
 
 }

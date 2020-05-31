@@ -1,5 +1,7 @@
 package com.promineotech.workoutLog.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,8 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.promineotech.workoutLog.entity.Workout;
 import com.promineotech.workoutLog.service.WorkoutService;
 
+
 @RestController
-@RequestMapping("/persons/{personId}/posts/{postId}/workouts")
+@RequestMapping("/persons/{username}/workouts")
 public class WorkoutController {
 
 	@Autowired
@@ -24,6 +27,12 @@ public class WorkoutController {
 		return new ResponseEntity<Object>(service.getAllWorkouts(), HttpStatus.OK);
 	}
 	
+	@RequestMapping(value="/{workoutId}", method=RequestMethod.GET)
+	public ResponseEntity<Object> getWorkout(@PathVariable Long workoutId) {
+		return new ResponseEntity<Object>(service.getWorkout(workoutId), HttpStatus.OK);
+	}
+	
+	
 	@RequestMapping(value="/{workoutId}", method=RequestMethod.PUT)
 	public ResponseEntity<Object> updateWorkout(@RequestBody Workout workout, @PathVariable Long workoutId) {
 		try {
@@ -33,10 +42,10 @@ public class WorkoutController {
 		}
 	}
 	
-	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Object> createWorkout(@RequestBody Workout workout, @PathVariable Long personId) {
+	@RequestMapping(value="/{userId}", method=RequestMethod.POST)
+	public ResponseEntity<Object> createWorkout(@RequestBody Workout workout, @PathVariable Long userId) {
 		try {
-			return new ResponseEntity<Object>(service.createWorkout(workout, personId), HttpStatus.OK);
+			return new ResponseEntity<Object>(service.createWorkout(workout, userId), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<Object>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
